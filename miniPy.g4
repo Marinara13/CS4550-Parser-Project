@@ -10,3 +10,4 @@ expr: expr ('+'|'-'|'*'|'/') expr
 NEWLINE : [\r\n]+;
 INT: [0-9]+;
 VARNAME: [a-z]+; 
+SPACE: [ \t] -> skip;
