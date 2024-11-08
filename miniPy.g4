@@ -1,72 +1,51 @@
 grammar miniPy;
 
-prog: (expr NEWLINE)*;
+prog: (line NEWLINE)*;
 
-expr: (operation | assignment);
+line: operation 
+    | assignment 
+    | both;
 
-operation: (add | sub | mul | div | mod);
+operation: add 
+    | sub 
+    | mul 
+    | div 
+    | mod;
 
-assignment: (equ | addequ | subequ | mulequ | divequ);
+assignment: equ 
+    | addequ 
+    | subequ 
+    | mulequ 
+    | divequ;
 
-variable: VAR STR INT FLO BOO;
+both: variable ('+='|'-='|'*='|'/='|'=') variable ('+'|'-'|'*'|'/'|'%') variable;
 
-add: variable ('+') variable
-    | INT
-    | FLO
-    | VAR;
+variable: VAR | STR | INT | FLO | BOO;
 
-sub: variable ('-') variable
-    | INT
-    | FLO
-    | VAR;
+add: variable ('+') variable;
 
-mul: variable ('*') variable
-    | INT
-    | FLO
-    | VAR;
+sub: variable ('-') variable;
 
-div: variable ('/') variable
-    | INT
-    | FLO
-    | VAR;
+mul: variable ('*') variable;
 
-mod: variable ('%') variable
-    | INT
-    | FLO
-    | VAR;
+div: variable ('/') variable;
 
-equ: variable ('=') variable
-    | VAR
-    | STR
-    | INT
-    | FLO
-    | BOO;
+mod: variable ('%') variable;
 
-addequ: variable ('+=') variable
-    | INT
-    | FLO
-    | VAR;
+equ: variable ('=') variable;
 
-subequ: variable ('-=') variable
-    | INT
-    | FLO
-    | VAR;
+addequ: variable ('+=') variable;
 
-mulequ: variable ('*=') variable
-    | INT
-    | FLO
-    | VAR;
+subequ: variable ('-=') variable;
 
-divequ: variable ('/=') variable
-    | INT
-    | FLO
-    | VAR;
+mulequ: variable ('*=') variable;
 
-NEWLINE : [\r\n]+;
-fragment NUM : [0-9];
+divequ: variable ('/=') variable;
+
+NEWLINE : [\n]+;
 VAR : [a-z0-9_]+;
-STR : '"20"';
-INT : NUM+;
-FLO : NUM+ [.,] NUM+;
+STR : '"' .*? '"';
+INT : [0-9]+;
+FLO : [0-9]+[.][0-9]+;
 BOO : ('True'|'False');
-SPACE : [ \t] -> skip;
+SPACE : [ ] -> skip;
