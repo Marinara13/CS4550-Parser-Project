@@ -2,50 +2,35 @@ grammar miniPy;
 
 prog: (line NEWLINE)*;
 
-line: operation 
-    | assignment 
-    | both;
+line
+    : assignment 
+    ;
 
-operation: add 
-    | sub 
-    | mul 
-    | div 
-    | mod;
+assignment
+    : VAR ( '=' | '+=' | '-=' | '*=' | '/=' ) expression
+    ;
 
-assignment: equ 
-    | addequ 
-    | subequ 
-    | mulequ 
-    | divequ;
+expression
+    : expression ( '*' | '/' | '%' ) expression
+    | expression ( '+' | '-' ) expression
+    | STR
+    | CHAR
+    | BOO
+    | INT
+    | FLO
+    | VAR
+    | array
+    ;
 
-both: variable ('+='|'-='|'*='|'/='|'=') variable ('+'|'-'|'*'|'/'|'%') variable;
+array
+    : '[' ( ( expression',' )* expression )? ']'
+    ;
 
-variable: VAR | STR | INT | FLO | BOO;
-
-add: variable ('+') variable;
-
-sub: variable ('-') variable;
-
-mul: variable ('*') variable;
-
-div: variable ('/') variable;
-
-mod: variable ('%') variable;
-
-equ: variable ('=') variable;
-
-addequ: variable ('+=') variable;
-
-subequ: variable ('-=') variable;
-
-mulequ: variable ('*=') variable;
-
-divequ: variable ('/=') variable;
-
-NEWLINE : [\n]+;
+NEWLINE : ( '\r'? '\n' )+;
+INT : [0-9]+;
 VAR : [a-z0-9_]+;
 STR : '"' .*? '"';
-INT : [0-9]+;
+CHAR : '\'' [a-zA-Z] '\'';
 FLO : [0-9]+[.][0-9]+;
 BOO : ('True'|'False');
 SPACE : [ ] -> skip;
