@@ -1,6 +1,8 @@
 grammar miniPy;
 
-prog: (line NEWLINE)*;
+prog
+    : (line NEWLINE)*
+    ;
 
 line
     : assignment 
@@ -14,7 +16,7 @@ expression
     : expression ( '*' | '/' | '%' ) expression
     | expression ( '+' | '-' ) expression
     | STR
-    | CHAR
+    | CHA
     | BOO
     | INT
     | FLO
@@ -26,11 +28,23 @@ array
     : '[' ( ( expression',' )* expression )? ']'
     ;
 
-NEWLINE : ( '\r'? '\n' )+;
-INT : [0-9]+;
-VAR : [a-z0-9_]+;
-STR : '"' .*? '"';
-CHAR : '\'' [a-zA-Z] '\'';
-FLO : [0-9]+[.][0-9]+;
+NEWLINE 
+    : ( '\r'? '\n' )+
+    ;
+INT 
+    : [0-9]+
+    ;
+VAR 
+    : [a-zA-Z0-9_]+
+    ;
+STR 
+    : '"' .*? '"'
+    ;
+CHA 
+    : '\'' . '\''
+    ;
+FLO 
+    : INT '.' INT
+    ;
 BOO : ('True'|'False');
 SPACE : [ ] -> skip;
