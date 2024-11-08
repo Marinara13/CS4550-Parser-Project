@@ -42,7 +42,7 @@ mulequ: variable ('*=') variable;
 
 divequ: variable ('/=') variable;
 
-NEWLINE : [\n]+;
+NEWLINE : ( '\r'? '\n' )+;
 VAR : [a-z0-9_]+;
 STR : '"' .*? '"';
 INT : [0-9]+;
