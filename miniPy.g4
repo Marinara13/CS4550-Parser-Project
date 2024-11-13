@@ -6,10 +6,19 @@ prog
 
 line
     : assignment 
+    | conditional
     ;
 
 assignment
     : VAR ( '=' | '+=' | '-=' | '*=' | '/=' ) expression
+    ;
+
+comparison_op
+    : '==' | '!=' | '>' | '>=' | '<' | '<='
+    ;
+
+logical_op
+    : 'and' | 'or'
     ;
 
 expression
@@ -22,6 +31,25 @@ expression
     | FLO
     | VAR
     | array
+    ;
+
+conditional
+    : 'if' condition ':' (line NEWLINE)+ (elif_block | else_block | elif_block else_block)?
+    ;
+
+elif_block
+    : ('elif' condition ':' (line NEWLINE)+)+
+    ;
+
+else_block
+    : 'else' ':' (line NEWLINE)+
+    ;
+
+condition
+    : expression comparison_op expression
+    | expression logical_op expression
+    | 'not' condition
+    | '(' condition ')'
     ;
 
 array
