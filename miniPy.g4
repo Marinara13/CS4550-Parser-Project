@@ -1,7 +1,7 @@
 grammar miniPy;
 
 prog
-    : (line NEWLINE)*
+    : (line NEWLINE?)*
     ;
 
 line
@@ -15,10 +15,6 @@ assignment
 
 comparison_op
     : '==' | '!=' | '>' | '>=' | '<' | '<='
-    ;
-
-logical_op
-    : 'and' | 'or'
     ;
 
 expression
@@ -47,32 +43,47 @@ else_block
 
 condition
     : expression comparison_op expression
-    | expression logical_op expression
+    | expression ('and' | 'or') expression
     | 'not' condition
     | '(' condition ')'
     ;
 
 array
-    : '[' ( ( expression',' )* expression )? ']'
+    : '[' ( ( expression ',' )* expression )? ']'
     ;
 
-NEWLINE 
-    : ( '\r'? '\n' )+
+NEWLINE
+    : ( '\r'? '\n' )+ [ \t]* -> skip
     ;
+
 INT 
     : [0-9]+
     ;
+
 VAR 
-    : [a-zA-Z0-9_]+
+    : [a-zA-Z_][a-zA-Z0-9_]*
     ;
+
 STR 
-    : '"' .*? '"'
+    : '"' ( ~["\\] | '\\' . )* '"'
     ;
+
 CHA 
     : '\'' . '\''
     ;
+
 FLO 
     : INT '.' INT
     ;
-BOO : ('True'|'False');
-SPACE : [ ] -> skip;
+
+BOO 
+    : ('True' | 'False')
+    ;
+
+SPACE 
+    : [ ] -> skip
+    ;
+
+TAB 
+    : '\t' -> skip
+    ;
