@@ -57,7 +57,7 @@ array
     ;
 
 NEWLINE
-    : ( '\r'? '\n' )+ [ \t]* -> skip
+    : '\r'? '\n'
     ;
 
 INT 
