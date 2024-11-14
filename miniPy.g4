@@ -17,6 +17,10 @@ comparison_op
     : '==' | '!=' | '>' | '>=' | '<' | '<='
     ;
 
+logical_op
+    : 'and' | 'or'
+    ;
+
 expression
     : expression ( '*' | '/' | '%' ) expression
     | expression ( '+' | '-' ) expression
@@ -43,7 +47,7 @@ else_block
 
 condition
     : expression comparison_op expression
-    | expression ('and' | 'or') expression
+    | condition logical_op condition
     | 'not' condition
     | '(' condition ')'
     ;
