@@ -1,11 +1,11 @@
 grammar miniPy;
 
 prog
-    : (line NEWLINE?)*
+    : line (NEWLINE+ line)* EOF
     ;
 
 line
-    : assignment 
+    : assignment
     | conditional
     ;
 
@@ -34,15 +34,19 @@ expression
     ;
 
 conditional
-    : 'if' condition ':' (line NEWLINE)+ (elif_block | else_block | elif_block else_block)?
+    : if_block (NEWLINE elif_block)* (NEWLINE else_block)?
+    ;
+
+if_block
+    : 'if' condition ':' NEWLINE ('\t' line? NEWLINE)* '\t' line
     ;
 
 elif_block
-    : ('elif' condition ':' (line NEWLINE)+)+
+    : ('elif' condition ':' NEWLINE ('\t' line? NEWLINE)* '\t' line)+
     ;
 
 else_block
-    : 'else' ':' (line NEWLINE)+
+    : 'else' ':' NEWLINE ('\t' line? NEWLINE)* '\t' line
     ;
 
 condition
@@ -50,6 +54,7 @@ condition
     | condition logical_op condition
     | 'not' condition
     | '(' condition ')'
+    | expression
     ;
 
 array
@@ -61,7 +66,7 @@ NEWLINE
     ;
 
 INT 
-    : [0-9]+
+    : '-'? [0-9]+
     ;
 
 VAR 
@@ -77,7 +82,7 @@ CHA
     ;
 
 FLO 
-    : INT '.' INT
+    : '-'? INT '.' INT
     ;
 
 BOO 
@@ -86,8 +91,4 @@ BOO
 
 SPACE 
     : [ ] -> skip
-    ;
-
-TAB 
-    : '\t' -> skip
     ;
