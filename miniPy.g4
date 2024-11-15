@@ -7,6 +7,7 @@ prog
 line
     : assignment
     | conditional
+    | '\t'+
     ;
 
 assignment
