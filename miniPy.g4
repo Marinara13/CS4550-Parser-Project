@@ -6,12 +6,12 @@ import java.util.Stack;
 {
 Stack<String> stack = new Stack<>();
 Stack<Integer> finalCheckStack=new Stack<>();
-//Modified
+
 public void finalCheckPre(){
     finalCheckStack.push(stack.size());
 }
 
-//Modified
+
 public void finalCheck(){
     int originalWhiteSpaceAmountForCurrentIf=finalCheckStack.pop();
     while(stack.size()>originalWhiteSpaceAmountForCurrentIf){
@@ -155,23 +155,19 @@ ifStructure:
   {finalCheck();}
   ;
 
-//modified
 forStatement: WhiteSpaceAndTab Var WhiteSpaceAndTab 'in'WhiteSpaceAndTab Var WhiteSpaceAndTab?':'
 | WhiteSpaceAndTab Var WhiteSpaceAndTab 'in' WhiteSpaceAndTab 'range' WhiteSpaceAndTab?'('Num','Num'):';
 
-//modified
 whileStatement: WhiteSpaceAndTab judgement (WhiteSpaceAndTab( 'and'|'or') WhiteSpaceAndTab judgement)* WhiteSpaceAndTab? ':'
 | '('judgement'):'
 | WhiteSpaceAndTab Bool':';
-//whileStatement: WhiteSpaceAndTab judgement (WhiteSpaceAndTab( 'and'|'or') WhiteSpaceAndTab judgement)* WhiteSpaceAndTab? ':'
-//| '('judgement')';
 
 ifStatement: WhiteSpaceAndTab judgement (WhiteSpaceAndTab( 'and'|'or') WhiteSpaceAndTab judgement)* WhiteSpaceAndTab? ':'
 |WhiteSpaceAndTab Bool':'WhiteSpaceAndTab?;
 
 ifBlockStatement:(WhiteSpaceAndTab NEWLINE)*WhiteSpaceAndTab ifBlockStatement_FirstLine NEWLINE?((WhiteSpaceAndTab NEWLINE)*WhiteSpaceAndTab  ifBlockStatement_NotfirstLine NEWLINE?)*;
 
-//modified
+
 ifBlockStatement_FirstLine: statement|ifStructureNestedSTF|whileStructure;
 ifBlockStatement_NotfirstLine: statement|ifStructureNestedSTF|whileStructure;
 
@@ -228,7 +224,3 @@ CommentSignal:'\'\'\'';
 Comment1:CommentSignal ((~('\''))|((~('\''))'\'')|('\''(~('\''))))*CommentSignal;
 Comment2:'#'(~[\r\n])*;
 
-//(loc=没有;;-1(su;es))
-//'-'
-//(p=tbc)th=ba(m)
-//___totest(stf)
