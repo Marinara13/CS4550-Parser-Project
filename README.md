@@ -29,6 +29,8 @@ Afterwards, you can type whatever you'd like to parse. When you're done, hit CTR
 
         `grun miniPy prog file_name.py -gui`  
 
+just make sure that the file file_name.py is located in the same directory. 
+
 ## Parser Demo Video:
 
 
