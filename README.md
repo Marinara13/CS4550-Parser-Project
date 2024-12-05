@@ -18,16 +18,16 @@ Depending on the method you choose to use the parser, you may need to download A
 ## How to Use Parser: 
 There are two methods to use our parser. The simplest way is to use the online [ANTLR Lab](http://lab.antlr.org/) provided by ANTLR. You don't need to download anything to use this method. To use the ANTLR Lab, make sure the 'Lexer' tab in the top left is empty, since our grammar is combined (it is both a parser and lexer). Then, copy and paste our grammar into the 'Parser' tab. Change the start rule to 'prog' and enter whatever text you'd like to parse in the input box. Finally, click the green 'Run' button, and it will generate a parse tree based on your input (or tell you if there are parse errors). The other way to use our parser is more involved. To use this method, you'll need to download ANTLR and Java as outlined above. You'll also need to download our grammar file and place it in a directory. Once everything is set up correctly, and assuming you've created shortcut commands/aliases, you can run these commands in a terminal after navigating to the directory:  
   
-        `antlr4 miniPy.g4`  
-        `javac miniPy*.java`  
+        antlr4 miniPy.g4  
+        javac miniPy*.java  
       
 which will create lexer and parser files. Then, to open an interactive parsing environment, enter the command:  
   
-        `grun miniPy r -gui`  
+        grun miniPy r -gui  
       
 Afterwards, you can type whatever you'd like to parse. When you're done, hit CTRL+D on Unix or CTRL+Z on Windows to signal that you're done entering. A pop-up window with the parse tree will appear. If you have a file of text you'd like to parse you can pass that to the grun command like so:  
 
-        `grun miniPy prog file_name.py -gui`  
+        grun miniPy prog file_name.py -gui  
 
 just make sure that the file file_name.py is located in the same directory. 
 
