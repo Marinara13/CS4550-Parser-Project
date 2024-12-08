@@ -33,5 +33,6 @@ Afterwards, you can type whatever you'd like to parse. When you're done, hit CTR
 just make sure that the file file_name.py is located in the same directory. 
 
 ## Parser Demo Video:
+- [Using ANTLR Lab](https://youtu.be/jtoqZnVuL6Y)
 
 
