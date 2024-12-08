@@ -24,7 +24,7 @@ The other way to use our parser is more involved. To use this method, you'll nee
       
 which will create lexer and parser files. Then, to open an interactive parsing environment, enter the command:  
   
-        grun miniPy r -gui  
+        grun miniPy prog -gui  
       
 Afterwards, you can type whatever you'd like to parse. When you're done, hit CTRL+D on Unix or CTRL+Z on Windows to signal that you're done entering. A pop-up window with the parse tree will appear. If you have a file of text you'd like to parse you can pass that to the grun command like so:  
 
