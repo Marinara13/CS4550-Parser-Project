@@ -34,5 +34,6 @@ just make sure that the file file_name.py is located in the same directory.
 
 ## Parser Demo Video:
 - [Using ANTLR Lab](https://youtu.be/jtoqZnVuL6Y)
+- [Using command line](https://youtu.be/HZtrIo1Xfgc)
 
 
