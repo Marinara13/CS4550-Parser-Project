@@ -55,7 +55,7 @@ just make sure that the file file_name.py is located in the same directory.
 
 #### Parser Rules
 
-1. - prog
+1. - prog (this is our start rule)
 2. - expr
 3.  - blockStatement_FirstLine
 --
