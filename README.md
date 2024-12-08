@@ -37,3 +37,76 @@ just make sure that the file file_name.py is located in the same directory.
 - [Using command line](https://youtu.be/HZtrIo1Xfgc)
 
 
+## Grammar File Explanation:
+
+#### Lexer Rules
+
+1.  WhiteSpaceAndTab
+2.	NEWLINE
+3.	List
+4.	Bool
+5.	Str
+6.	Var
+7.	Num
+8.	Comment1
+9.	Comment2
+
+
+
+#### Parser Rules
+
+1. - prog
+2. - expr
+3.  - blockStatement_FirstLine
+--
+ Match the first statement in a "while" "for" or "if" block
+	-  blockStatement_NoteFirstLine
+--
+ Match all statements, except the first one, in a "while" "for" or "if" block
+4.  - whileStructure
+    - forstructure
+    - ifStructure
+    - ifStructureNestedSTF
+--
+Using ifStructureNestedSTF is to make it easier to check the indentation before "else" statement and "elif" statement
+
+5. 
+    - forStatement
+    - whileStatement
+    - ifStatement
+--
+Match the judgement statement in a "while" "for" or "if" block
+    
+6.  - judgement
+--
+ Match several types of condition statements
+
+
+
+#### Functions
+1. - judgementAfterElseElifNotNestedSTFFirst
+--
+ Judge whether the indentation is legitimate in the first line, and save the amount of indentation. Used in the first statement in a 'if' structure which is not nested.
+In this function, it needs to pops a saved amount of indentation in a stack from the current if block.
+   - judgementAfterIfFirst
+--
+Judge whether the indentation is legitimate in the first line, and save the amount of indentation. Used in the first statement in a "if" structure which is nested, 'while' and 'for' structure. If the statement is in an 'else' or 'elif' statement in a nested if structure, the indentation check before the 'else'or 'elif' statement would pop the last indentation. If the statement is in an 'while','if', 'for' of a nested structure, it doesn't need to pop the indentation object from last block.
+
+
+2. - judgementAfterIfNotFirst
+--
+ judge whether the amount of indentation of a statement, which is not the first line and in a "while" "for" or "if" block , is legitimate.
+3. - judgementAfterWhitesaceElseElifNestedSTF
+--
+ judge whether the amount of indentation before 'else' or 'elif' statement is legitimate.
+
+4. - Finalcheck
+	  - finalCheckStack
+	  - finalCheckPre
+	  - finalCheck
+--
+When getting out of a "while" "for" or "if" block, Remove the amount of indentation for the last block
+
+
+
+
